@@ -1,5 +1,6 @@
 const { validateServerVariables, validateOperationId, validateServerSecurity, validateChannels } = require('../lib/customValidators.js');
 const chai = require('chai');
+const { offset, checkErrorWrapper } = require('./testsUtils');
 
 const expect = chai.expect;
 const input = 'json';

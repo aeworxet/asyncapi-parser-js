@@ -3,6 +3,7 @@ const chaiAsPromised = require('chai-as-promised');
 const { EOL } = require('os');
 const eolLength = EOL.length;
 const ParserError = require('../lib/errors/parser-error');
+const util = require('util');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -35,6 +36,12 @@ testsUtils.checkErrorWrapper = async (fn, validationObject) => {
     await fn();
     throw Error('This error should not be reachable. If you reached it, it means the function did not throw a proper error and executed successfully.');
   } catch (e) {
+    // console.log('parsedJSON below');
+    // console.log(util.inspect(JSON.parse(parsedJSON), false, null));
+    // console.log('eee search for parsedJSON below');
+    // console.log(util.inspect(e, false, null));
+    console.log('e.validationErrors below');
+    console.log(e.validationErrors);
     const isProperError = e instanceof ParserError;
     if (!isProperError) console.log(e);
 
