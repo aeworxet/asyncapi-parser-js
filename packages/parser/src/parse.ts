@@ -46,15 +46,15 @@ export async function parse(parser: Parser, spectral: Spectral, asyncapi: Input,
     options = mergePatch<ParseOptions>(defaultOptions, options);
     // Normalize input to always be JSON 
     let loadedObj;
-    if (typeof asyncapi === 'string') {
-      try {
-        loadedObj = yaml.load(asyncapi);
-      } catch (e) {
-        loadedObj = JSON.parse(asyncapi);
-      }
-    } else {
+    // if (typeof asyncapi === 'string') {
+    //   try {
+    //     loadedObj = yaml.load(asyncapi);
+    //   } catch (e) {
+    //     loadedObj = JSON.parse(asyncapi);
+    //   }
+    // } else {
       loadedObj = asyncapi;
-    }
+    // }
     const { validated, diagnostics, extras } = await validate(parser, spectral, loadedObj, { ...options.validateOptions, source: options.source, __unstable: options.__unstable });
     if (validated === undefined) {
       return {
